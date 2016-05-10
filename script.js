@@ -10,8 +10,6 @@ function generateNewMap() {
     var sizeN = $('#size_n').val();
     var sizeM = $('#size_m').val();
 
-    //alert(sizeM);
-
     for (var i = 0; i < sizeN; i++) {
         for (var j = 0; j < sizeM; j++) {
             var cellID = getCellID(i, j);
@@ -117,41 +115,9 @@ function changeCellTypeByClick(targetID) {
         changeCellTypeByWallAction(targetID);
     } else if (click_action === "free") {
         changeCellTypeByFreeAction(targetID);
-    // } else if (click_action === "tile") {
-    //     var newNumber = getNumberForNewTile();
-    //     addTile(newNumber);
-    //     setSelectedTile(getCurrentTileID());
     }
 
 }
-
-// function getNumberForNewTile() {
-//
-//     var result = NaN;
-//
-//     var elements = $('.tile').map(function(indx, element){
-//         return $(element).attr("tile_number");
-//     });
-//
-//     var tile_numbers = elements.get();
-//
-//     var testNumber = 0;
-//     while (true) {
-//
-//         testNumber++;
-//         var testNumberStr = '' + testNumber;
-//
-//         var index = tile_numbers.indexOf(testNumberStr);
-//
-//         if (index == -1) {
-//             result = testNumber;
-//             break;
-//         }
-//
-//     };
-//
-//     return result;
-// }
 
 function changeCellTypeByWallAction(targetID) {
 
