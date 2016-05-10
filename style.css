@@ -1,0 +1,62 @@
+#levels_map
+{
+
+}
+
+.cell_free
+{
+	border: 1px solid #999;
+	position: absolute;
+    box-sizing: border-box;
+}
+
+.cell_wall
+{
+	border: 1px solid #999;
+	position: absolute;
+	background-color: chocolate;
+    box-sizing: border-box;
+}
+
+.cell_number
+{
+	border: 1px solid #999;
+	position: absolute;
+	text-align: center;
+    box-sizing: border-box;
+
+}
+
+.cell_number_inside
+{
+	color: #999999;
+}
+
+.tile
+{
+    border: 1px solid black;
+    position: absolute;
+    background-color: red;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.tile_number_inside
+{
+    color: #000;
+}
+
+
+.cell_selected
+{
+	border: 3px solid #0A0;
+    box-sizing: border-box;
+
+}
+
+.tile_selected
+{
+    border: 3px solid #0A0;
+    box-sizing: border-box;
+
+}

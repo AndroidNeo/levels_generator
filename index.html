@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html>
+<head>
+	<title>GAME</title>
+	<link rel="stylesheet" href="style.css" type="text/css" media="screen" /> 	
+	<script type="text/javascript" src="jquery-1.12.0.js"></script>
+	<script language="javascript" src="script.js"></script>
+</head>
+<body>
+	<div id="settings">
+		<span>
+        size N: <input id="size_n" value="8">
+        size M: <input id="size_m" value="8">
+            <button name="generate" onclick="generateNewMap()">generate</button>
+        </span>
+	</div>
+    <div id="indexes">
+        i: <input id="current_i" readonly>
+        j: <input id="current_j" readonly>
+    </div>
+    <div id="control">
+        <div>
+        cell: <input id="cell_number" placeholder = "none" onchange="cellNumberChange()">
+        tile: <input id="tile_number" placeholder = "none" onchange="tileNumberChange()">
+        </div>
+        <div>
+            <input id="click_action_select" type="radio" name="click_action" value="select" checked>select<Br>
+            <input id="click_action_wall"   type="radio" name="click_action" value="wall">wall<Br>
+            <input id="click_action_free"   type="radio" name="click_action" value="free">free<Br>
+        </div>
+        <br>
+        <button onmousedown="hideTiles()" onmouseup="showTiles()">Show/Hide Tiles</button>
+        <button onclick="exportLevel()">Export Level</button>
+    </div>
+    <div id="levels_map">
+    </div>
+</body>
+</html>
