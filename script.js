@@ -3,11 +3,10 @@ var L = 40;
 var VShift = 220;
 var HShift = 15;
 
-var levelNumber = 1; //getInputLevelNumber();
+var levelNumber = '';
 
 function getInputLevelNumber() {
-    console.log(parseInt(''+ $('#edit_level').val()));
-    return parseInt(''+ $('#edit_level').val());
+    return parseInt($('#edit_level').val());
 }
 
 function getLevel() {
@@ -71,6 +70,8 @@ function getLevelDetail() {
 function generateNewMap() {
 
     $('#levels_map').empty();
+
+    levelNumber = getInputLevelNumber();
 
     if (getLevel() !== '') {
         var levelDetail = getLevelDetail();
