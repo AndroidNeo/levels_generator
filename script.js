@@ -1,11 +1,82 @@
 
 var L = 40;
-var VShift = 190;
+var VShift = 220;
 var HShift = 15;
 
+var levelNumber = 1; //getInputLevelNumber();
+
+function getInputLevelNumber() {
+    console.log(parseInt(''+ $('#edit_level').val()));
+    return parseInt(''+ $('#edit_level').val());
+}
+
+function getLevel() {
+
+    var result = '';
+
+    if (levelNumber == 1) {
+        result = 'w,f,f,f,f,f,f,f;w,f,c1,c2,f.t4,f,f,f;w,f,c3,f,f.t2,f,f,f;f,f,c4.t5,f.t3,f.t1,f,f,f;f,f,f,f,f,f,f,f;f,f,f,f,f,f,f,f;f,f,f,f,f,f,f,f;f,f,f,f,f,f,f,f;';
+    }
+
+    return result;
+
+}
+
+function getLevelDetail() {
+
+    var result = [];
+
+    var level = getLevel();
+
+    var rows = [];
+    var p1 = -1;
+    while (true) {
+        var p2 = level.indexOf(';', p1 + 1);
+        if (p2 > 0) {
+            var row = level.substr(p1 + 1, p2 - p1 - 1);
+            rows.push(row);
+            p1 = p2;
+        } else {
+            break;
+        }
+    }
+
+    for (var i = 0; i < rows.length; i++) {
+
+        var rowDetail = [];
+
+        var row = rows[i];
+        row = row + ',';
+
+        var p1 = -1;
+        while (true) {
+            var p2 = row.indexOf(',', p1 + 1);
+            if (p2 > 0) {
+                var cellContent = row.substr(p1 + 1, p2 - p1 - 1);
+                rowDetail.push(cellContent);
+                p1 = p2;
+            } else {
+                break;
+            }
+        }
+
+        result.push(rowDetail);
+
+    }
+
+    return result;
+
+}
 
 function generateNewMap() {
+
     $('#levels_map').empty();
+
+    if (getLevel() !== '') {
+        var levelDetail = getLevelDetail();
+        $('#size_n').val(levelDetail.length);
+        $('#size_m').val(levelDetail[0].length);
+    }
 
     var sizeN = $('#size_n').val();
     var sizeM = $('#size_m').val();
@@ -43,12 +114,81 @@ function generateNewMap() {
 
     });
 
+    if (getLevel() !== '') {
+        loadLevel();
+    }
 
-    var targetID = 'cell_0_0';
+    var targetID = getCellID(0, 0);
 
     setCurrentIndexes(targetID);
     setSelectedCell(targetID);
 
+}
+
+function loadLevel() {
+
+    var levelDetail = getLevelDetail();
+
+    console.log(levelDetail);
+
+    for (var i = 0; i < levelDetail.length; i++) {
+        for (var j = 0; j < levelDetail[0].length; j++) {
+
+            var cellContent = levelDetail[i][j];
+            var cellContentObject = getCellContentObject(cellContent);
+
+            var cellID = getCellID(i, j);
+            setCurrentIndexes(cellID);
+
+            if (cellContentObject.w) {
+                changeCellTypeByWallAction(cellID);
+            } else if (cellContentObject.c > 0) {
+                changeCellTypeByNumberAction(cellID, cellContentObject.c);
+            }
+
+            var tileID = getTileID(i, j);
+            if (cellContentObject.t > 0) {
+                addTile(cellContentObject.t);
+            }
+
+        }
+    }
+
+}
+
+function getCellContentObject(cellContent) {
+
+    var result = {
+        'f': false,
+        'w': false,
+        'c': 0,
+        't': 0
+    };
+
+    var idx_c = cellContent.indexOf('c');
+    var idx_t = cellContent.indexOf('t');
+
+    if (cellContent === 'w') {
+        result.w = true;
+    } else {
+
+        if (cellContent.indexOf('f') >= 0) {
+            result.f = true;
+        } else if (idx_c >= 0) {
+            var c_str = cellContent.substr(idx_c + 1, 1);
+            var c_str_next = cellContent.substr(idx_c + 2, 1);
+            result.c = parseInt(c_str) + (isNumeric(c_str_next) ? parseInt(c_str_next) : 0);
+        }
+
+        if (idx_t >= 0) {
+            var t_str = cellContent.substr(idx_t + 1, 1);
+            var t_str_next = cellContent.substr(idx_t + 2, 1);
+            result.t = parseInt(t_str) + (isNumeric(t_str_next) ? parseInt(t_str_next) : 0);
+        }
+
+    }
+
+    return result;
 }
 
 function setCurrentIndexes(targetID) {
