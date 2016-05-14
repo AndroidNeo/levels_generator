@@ -13,8 +13,17 @@ function getLevel() {
 
     var result = '';
 
-    if (levelNumber == 1) {
-        result = 'w,f,f,f,f,f,f,f;w,f,c1,c2,f.t4,f,f,f;w,f,c3,f,f.t2,f,f,f;f,f,c4.t5,f.t3,f.t1,f,f,f;f,f,f,f,f,f,f,f;f,f,f,f,f,f,f,f;f,f,f,f,f,f,f,f;f,f,f,f,f,f,f,f;';
+    var levelList = [
+        'w,w,w,w,w,w,w,w;w,f,f,f,f,f,f,w;w,f,f,f,f,f,f,w;w,f,f,c1.t3,c2.t1,f,f,w;w,f,f,c3.t2,f,f,f,w;w,f,f,f,f,f,f,w;w,f,f,f,f,f,f,w;w,w,w,w,w,w,w,w;'
+        ,'w,w,w,w,w,w,w,w;w,f,f,f,f,f,f,w;w,f,f,f,f,f,f,w;w,f,f,c1,c2,f,f,w;w,f,f,c3,f.t4,f.t3,f,w;w,f,f,c4,f.t2,f.t1,f,w;w,f,f,f,f,f,f,w;w,w,w,w,w,w,w,w;'
+        ,'w,w,w,w,w,w,w,w;w,f,f,f,f,f,f,w;w,f,f,f,f,f,f,w;w,f,f,c1.t3,c2.t1,f,f,w;w,f,f,c3.t2,c4.t4,f,f,w;w,f,f,f,f,f,f,w;w,f,f,f,f,f,f,w;w,w,w,w,w,w,w,w;'
+        ,'w,w,w,w,w,w,w,w;w,w,w,f,f,w,w,w;w,w,f,c1,f.t4,f,w,w;w,f,f,c2,f.t2,f,f,w;w,f,f,c3.t1,c4.t5,f,f,w;w,w,f,f.t3,c5,f,w,w;w,w,w,f,f,w,w,w;w,w,w,w,w,w,w,w;'
+        ,'w,w,w,w,w,w,w,w;w,f,f,f,f,f,f,w;w,f,c1,c2,c3,c4,f,w;w,w,w,c5,c6,w,w,w;w,w,w,f.t1,f.t5,w,w,w;w,f,f.t3,f.t4,f.t6,f.t2,f,w;w,f,f,f,f,f,f,w;w,w,w,w,w,w,w,w;'
+        ,'w,w,w,w,w,w,w,w;w,w,w,w,w,w,w,w;w,w,f,f,f,f,f,w;w,w,f,w,c1.t5,w,f,w;w,w,f,c2.t2,c3.t1,c4.t4,f,w;w,w,f,w,c5.t3,w,f,w;w,w,f,f,f,f,f,w;w,w,w,w,w,w,w,w;'
+    ];
+
+    if (levelList.length >= levelNumber) {
+        result = levelList[levelNumber - 1];
     }
 
     return result;
